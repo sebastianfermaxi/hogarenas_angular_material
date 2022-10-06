@@ -1,0 +1,24 @@
+<div class="titulo">
+  <mat-card class="card-titulo" > LO QUE TENEMOS PARA OFRECERTE </mat-card>
+</div>
+
+
+<div class="container">
+
+
+  <mat-card class="card" *ngFor="let producto of listaProductos" >
+    <mat-grid-list cols="4" rowHeight="60px">
+      <mat-grid-tile colspan="4" rowspan="1" class="nombre" >{{producto.nombre}}</mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="3" class="imagen"><img src="{{producto.imagen}}" height="250px" width="250px"></mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1" class="descripcion">{{producto.descripcion}}</mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1" class="precio"> $ {{producto.precio }}</mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1">
+          <button mat-raised-button color="primary" (click)="addCarrito(producto)" style="cursor: pointer;">Añadir
+            <span><mat-icon style="margin-top: 7px;">shopping_cart</mat-icon></span>
+          </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+  </mat-card>
+
+
+</div>

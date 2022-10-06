@@ -1,0 +1,87 @@
+<div class="comprarCarrito">
+  <mat-card class="carrito">
+
+    <h2 class="titulo">Carrito de compras</h2>
+
+      <h4 *ngIf="listaCarrito.length === 0" class="textoCarrito">Nada para comprar</h4>
+
+      <table *ngIf="listaCarrito.length > 0" mat-table [dataSource]="listaCarrito" class="mat-elevation-z8" class="table">
+
+        <ng-container matColumnDef="cantidad" >
+          <th mat-header-cell *matHeaderCellDef class="header"> Cantidad </th>
+          <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef class="header"> Producto </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+          <th mat-header-cell *matHeaderCellDef class="header"> Precio </th>
+          <td mat-cell *matCellDef="let element"> ${{element.precio}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="subtotal">
+          <th mat-header-cell *matHeaderCellDef class="header"> Subtotal </th>
+          <td mat-cell *matCellDef="let element"> ${{element.precio * element.cantidad}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="borrar">
+          <th mat-header-cell *matHeaderCellDef class="header"> Borrar </th>
+          <td mat-cell *matCellDef="let element" class="icon-delete"
+            (click)="borrarProductoCarrito(element._id)">
+            <mat-icon style="height: 20px;" matTooltip="Eliminar producto">delete_forever</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+      </table>
+      <h3 *ngIf="listaCarrito.length > 0" class="total">Total: ${{total}}</h3>
+<div class="botones">
+  <button mat-raised-button color="" *ngIf="listaCarrito.length > 0" [routerLink]="['']">Volver</button>
+    <button mat-raised-button color="warn" *ngIf="listaCarrito.length > 0" [routerLink]="['']" (click)="borrarCarrito()">Borrar <mat-icon style="height: 20px; margin-bottom: 3px;" >delete_forever</mat-icon> </button>
+    <button mat-raised-button color="primary" *ngIf="listaCarrito.length > 0" (click)="siguiente()" >Siguiente</button>
+</div>
+
+
+
+  </mat-card>
+
+  <mat-card class="carrito" style="margin-top: 20px; margin-bottom: 30px;" *ngIf="divComprar && listaCarrito.length !== 0" >
+    <h2 class="titulo">Complete los campos</h2>
+
+    <form class="formulario" [formGroup]="form" (ngSubmit)="comprar()">
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre de la persona " formControlName="nombre" autocomplete="off">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Dirección</mat-label>
+        <input matInput placeholder="Dirección donde llevaremos el pedido" formControlName="direccion" autocomplete="off">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input matInput placeholder="Teléfono para avisar cuande estemos en camino" formControlName="telefono" autocomplete="off">
+
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nota</mat-label>
+        <input matInput placeholder="Tipos aderezos, tiempo de cocción y entrega" formControlName="nota"
+          autocomplete="off">
+
+      </mat-form-field>
+
+      <button  type="submit" mat-raised-button color="primary" [disabled]="form.invalid"  >Comprar</button>
+
+    </form>
+
+  </mat-card>
+
+</div>

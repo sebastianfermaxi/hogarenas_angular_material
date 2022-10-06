@@ -1,0 +1,31 @@
+.carrito{
+  width: 70%;
+  height: 100%;
+  justify-content: center;
+  display: block;
+}
+.boton{
+  display: block;
+  flex-wrap: wrap;
+}
+.table{
+  width: 100%;
+}
+
+.botones{
+  justify-content: space-between;
+    display: flex;
+    margin-top: 30px;
+    margin-inline: 15px;
+}
+.header{
+  text-align: center;
+  font-weight: 500;
+  color: black;
+}
+
+.total{
+  margin-top: 6px;
+  font-weight: 500;
+  text-align: center;
+}

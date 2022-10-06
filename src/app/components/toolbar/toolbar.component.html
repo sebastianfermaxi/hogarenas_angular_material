@@ -1,0 +1,58 @@
+<div class="" >
+    <mat-toolbar color="primary" style="height: 50px;">
+
+      <button mat-icon-button>
+        <mat-icon><span>
+      menu
+          </span></mat-icon>
+      </button>
+      <span>HOGAREÑAS</span>
+      <span class="example-spacer"></span>
+        <button mat-button routerLink="">INICIO</button>
+        <button mat-button routerLink="/promos">PROMOS</button>
+        <button mat-button routerLink="/contacto">CONTACTO</button>
+      <span class="example-spacer"></span>
+
+      <button  mat-icon-button [matMenuTriggerFor]="belowMenu">
+        <mat-icon [matBadge]="nroItemsCarrito" matBadgeColor="warn"><span class="material-symbols-outlined">
+          shopping_cart
+        </span></mat-icon>
+      </button>
+
+      <div mat-icon-button>
+        <mat-icon></mat-icon>
+      </div>
+
+      <mat-menu #belowMenu="matMenu" class="carrito" style="max-height: 900px; overflow: auto;">
+
+        <h4 *ngIf="listaCarrito.length == 0" class="textoCarrito">Carrito vacío</h4>
+
+        <table mat-table [dataSource]="listaCarrito" class="mat-elevation-z0">
+
+          <ng-container matColumnDef="cantidad">
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()"> {{element.cantidad}}x</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre" >
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()"> {{element.nombre | slice : 0  : 23 }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="borrar">
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()" class="icon-delete"
+              (click)="borrarProductoCarrito(element._id)"> <mat-icon style="height: 20px;" matTooltip="Eliminar producto">delete_forever</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="btn" (click)="$event.stopPropagation()">
+          <button mat-raised-button color="primary" *ngIf="listaCarrito.length > 0" (click)="comprar()">Comprar</button>
+        </div>
+
+
+      </mat-menu>
+
+    </mat-toolbar>
+
+</div>
